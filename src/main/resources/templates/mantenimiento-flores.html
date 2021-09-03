@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Mantenimiento Libro</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<script type = "text/javascript">
+	function confirmareliminar()
+	{
+		var respuesta = confirm('¿Estar seguro de eliminar?');
+		if (respuesta == true)
+		{
+			return true;
+			
+		}
+		else{ return false;}
+		
+	} 	
+	function mensaje()
+	{
+		window.alert('Se elimino correctamente :D');
+		
+	}
+</script>
+
+<body>
+
+	<div style="margin-left: 10%; width:80%">
+		<h1>Mantenimiento de Libro</h1>
+
+		<form th:object="${libros}" method="POST" th:action="@{/eliminar}">
+			<div class="form-group">
+				<label for="codigo">Código</label>
+				<input th:field="*{codigo}" type="text" class="form-control" id="codigo" placeholder="Ingrese código">
+			</div>
+			<div class="form-group">
+				<label for="nombre">Nombre</label>
+				<input th:field="*{nombre}" type="text" class="form-control" id="nombre" placeholder="Ingrese nombre">
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="estado">Estado</label>
+					<select th:field="*{id_estado}" class="form-control">
+						<option th:value="-1" th:text="[Seleccione]"></option>
+						<option th:value="1" th:text="Disponible"></option>
+						<option th:value="2" th:text="Agotado"></option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label for="fecha_publicacion">Publicación</label>
+				<input th:field="*{fecha_publicacion}" type="date" class="form-control" id="fecha_publicacion" placeholder="Ingrese fecha aaaa-mm-dd">
+			</div>
+			
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="autor">Autor</label>
+					<select th:field="*{id_autor}" class="form-control">
+						<option th:value="-1" th:text="[Seleccione]"></option>
+						<option th:value="1" th:text="Mario_Vargas_Llosa"></option>
+						<option th:value="2" th:text="Cesar_Vallejo"></option>
+						<option th:value="3" th:text="Ricardo_Palma"></option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="genero">Género</label>
+					<select th:field="*{id_genero}" class="form-control">
+						<option th:value="-1" th:text="[Seleccione]"></option>
+						<option th:value="1" th:text="Terror"></option>
+						<option th:value="2" th:text="Aventura"></option>
+						<option th:value="3" th:text="Dramático"></option>
+					</select>
+				</div>
+			</div>
+
+			<button type="submit" class="btn btn-primary" onclick="return confirmareliminar(),mensaje()">Eliminar</button>
+
+			<a href="/listado" class="btn btn-primary">Volver al Listado</a>
+
+		</form>
+	</div>
+</body>
+
+</html>

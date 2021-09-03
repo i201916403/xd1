@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Listado Libros</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Popper JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div style="margin-left: 10%; width:80%">
+	<table class="table table-hover">
+	
+		<h1 style="text-align: center;">Listado Libros - Fernando Flores Carita</h1>
+			
+		<form  object="${xautor}" action="@{/buscarxautor}" method="POST" >
+			
+			<div class="form-group text-muted">
+				<label class="text-primary">Buscar por autor:</label>
+				<select name="*{id_autor}" class="dropdown">>
+					<option th:value="-1">[Seleccione autor]</option>
+					<option th:value="1">Mario Vargas Llosa</option>
+					<option th:value="2">Cesar Vallejo</option>
+					<option th:value="3">Ricardo Palma</option>
+				</select>
+			</div>
+    		<button type="submit" class="btn btn-primary">Consultar</button>
+    	
+    	</form>
+
+		<thead>
+			<tr>
+				<th>Codigo</th>
+				<th>Nombre</th>
+				<th>Estado</th>
+				<th>Fecha publicación</th>		
+				<th>Autor</th>
+				<th>Genero</th>
+
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="l : ${lstLibro}" >
+				<td th:text="${l.codigo}"></td>
+				<td th:text="${l.nombre}"></td>
+				<td th:text="${l.id_estado}"></td>	
+				<td th:text="${l.fecha_publicacion}"></td>									
+				<td th:text="${l.id_estado}"></td>	
+				<td th:text="${l.id_genero}"></td>	
+				
+				<td>
+					<form th:action="@{/cargareliminar}" method="POST">
+						<input type="hidden" id="codigo" name="codigo" th:value="${l.codigo}"/>
+						<button type="submit" class="btn btn-danger">Seleccione</button>
+					</form>
+				</td>
+
+
+			</tr>
+		</tbody>
+		
+		
+	</table>
+
+</div>
+</body>
+</html>
